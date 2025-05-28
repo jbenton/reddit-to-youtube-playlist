@@ -21,9 +21,10 @@ posts = subreddit.hot(limit=20)  # or .top("day"), .new(limit=20), etc.
 yt_ids = set()
 for post in posts:
     print(f"Checking: {post.title} → {post.url}")  # 👈 DEBUG
-    match = re.search(r"(?:youtu\.be/|youtube\.com/watch\\?v=)([\\w-]{11})", post.url)
+    match = re.search(r"(?:youtu\.be/|youtube\.com/watch\?v=)([\w-]{11})", url)
     if match:
-        yt_ids.add(match.group(1))
+        vid = match.group(1)
+        yt_ids.add(vid)
 
 print(f"✅ Found {len(yt_ids)} YouTube video(s)")
 
