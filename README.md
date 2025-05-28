@@ -1,6 +1,6 @@
 # Reddit to YouTube Playlist Importer
 
-This script fetches YouTube videos shared in a specified subreddit and adds them to a YouTube playlist. It checks for duplicates before adding new videos.
+This script fetches YouTube videos that are shared in a specified subreddit and adds them to a YouTube playlist. It checks for duplicates before adding new videos, and it starts removing the oldest videos once the playlist hits 500 videos.
 
 ## Features
 
@@ -25,14 +25,14 @@ This script fetches YouTube videos shared in a specified subreddit and adds them
     pip install -r requirements.txt
     ```
 
-3.  **Set up Environment Variables:**
+3.  **Set up environment variables:**
     The script requires several environment variables to be set for it to function correctly. These include API credentials for both Reddit and YouTube, and settings for script behavior. See the "Configuration" section below for details.
 
 ## Configuration
 
 The script uses the following environment variables for configuration:
 
-### Reddit API Credentials (Mandatory)
+### Reddit API credentials
 These are required to access the Reddit API. You'll need to create a Reddit application at [https://www.reddit.com/prefs/apps](https://www.reddit.com/prefs/apps).
 *   `REDDIT_CLIENT_ID`: Your Reddit application client ID.
 *   `REDDIT_CLIENT_SECRET`: Your Reddit application client secret.
@@ -40,19 +40,19 @@ These are required to access the Reddit API. You'll need to create a Reddit appl
 *   `REDDIT_PASSWORD`: Your Reddit password.
 *   `REDDIT_USER_AGENT`: A unique user agent string for your Reddit application (e.g., "RedditToYouTubePlaylist/1.0 by u/YourUsername").
 
-### YouTube API Credentials (Mandatory)
+### YouTube API credentials
 These are required to access the YouTube Data API. You'll need a Google Cloud Platform project with the YouTube Data API v3 enabled.
 *   `CLIENT_SECRET_JSON`: Your Google Cloud project's client secret JSON content, **base64 encoded**. You can download this JSON file from the "Credentials" page of your GCP project. After downloading, encode its entire content to base64.
 *   `TOKEN_JSON`: The OAuth 2.0 token JSON for YouTube API access, **base64 encoded**. This token is typically generated the first time you authorize the application to access your YouTube account. The script (if run interactively for the first time with appropriate OAuth setup) would guide you through this, or you might need a separate script/process to generate this if you followed a guide like the one for `google-auth-oauthlib`. Ensure the generated JSON content is base64 encoded.
 *   `PLAYLIST_ID`: The ID of the YouTube playlist where videos will be added. You can find this in the URL of your playlist (e.g., `PLxxxxxxxxxxxxxxxxxxxx`).
 
-### Script Behavior (Optional)
+### Script behavior
 *   `SUBREDDIT_NAME`: The name of the subreddit to fetch posts from (e.g., "listentothis", "videos").
     *   Defaults to: `"listentothis"` if not set.
 *   `POST_LIMIT`: The number of posts to fetch from the subreddit.
     *   Defaults to: `20` if not set. Must be a valid integer.
 
-## Running the Script
+## Running the script
 
 Once the setup is complete and environment variables are configured, you can run the script:
 
@@ -62,7 +62,7 @@ python add_from_reddit.py
 
 The script will log its actions to the console, including posts checked, videos found, and videos added to the playlist.
 
-## How to Base64 Encode Credentials
+## How to Base64 encode credentials
 
 For `CLIENT_SECRET_JSON` and `TOKEN_JSON`, you need to provide their content as base64 encoded strings.
 
