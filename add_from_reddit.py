@@ -12,8 +12,18 @@ creds = Credentials.from_authorized_user_info(token_info)
 youtube = build("youtube", "v3", credentials=creds)
 
 # Fetch top Reddit posts
-res = requests.get("https://www.reddit.com/r/listentothis/hot.json?limit=20",
-                   headers={"User-Agent": "reddit-to-yt-script by bot"})
+headers = {
+    "User-Agent": "reddit-to-yt-script by u/jbentonbot",  # use a real-looking Reddit UA
+}
+
+res = requests.get("https://www.reddit.com/r/listentothis/hot.json?limit=20", headers=headers)
+
+# Debug: check what we actually got back
+print("Reddit status code:", res.status_code)
+print("Reddit response (first 200 chars):", res.text[:200])
+
+res.raise_for_status()  # will show clearer error if it failed
+
 posts = res.json()["data"]["children"]
 
 # Extract YouTube video IDs
