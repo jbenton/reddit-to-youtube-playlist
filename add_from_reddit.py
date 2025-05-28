@@ -13,7 +13,7 @@ youtube = build("youtube", "v3", credentials=creds)
 
 # Fetch top Reddit posts
 res = requests.get("https://www.reddit.com/r/listentothis/hot.json?limit=20",
-                   headers={"User-Agent": "reddit-to-yt-bot"})
+                   headers={"User-Agent": "reddit-to-yt-script by bot"})
 posts = res.json()["data"]["children"]
 
 # Extract YouTube video IDs
