@@ -20,22 +20,14 @@ posts = subreddit.hot(limit=20)  # or .top("day"), .new(limit=20), etc.
 
 yt_ids = set()
 for post in posts:
-    print(f"Checking: {post.title} → {post.url}")  # 👈 DEBUG
+    url = post.url
+    print(f"Checking: {post.title} → {url}")
     match = re.search(r"(?:youtu\.be/|youtube\.com/watch\?v=)([\w-]{11})", url)
     if match:
         vid = match.group(1)
         yt_ids.add(vid)
 
 print(f"✅ Found {len(yt_ids)} YouTube video(s)")
-
-yt_ids = set()
-for post in posts:
-    url = post.url
-    match = re.search(r"(?:youtu\.be/|youtube\.com/watch\?v=)([\w-]{11})", url)
-    if match:
-        yt_ids.add(match.group(1))
-
-print(f"Found {len(yt_ids)} YouTube video(s)")
 
 # --- YouTube setup ---
 client_secret = json.loads(base64.b64decode(os.environ["CLIENT_SECRET_JSON"]))
